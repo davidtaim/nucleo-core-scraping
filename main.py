@@ -1,7 +1,6 @@
 from datetime import datetime
 from core_radio_scrapping import CoreRadioWrapper
 from db import DbMySql
-from pprint import pprint
 
 class MySqlSaver:
 
