@@ -5,7 +5,7 @@ class DbMySql:
         self.mydb = mysql.connector.connect(host='108.179.194.28', user='lovenoti_core', password='polaris260', db='lovenoti_core_radio')
 
     def execute_insert_album(self, album: tuple) -> str:
-        query = "insert into Album (title, country, genre, qualityAvailable, imageLink, views, postDate, timeAgo, updatedAt) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        query = "insert into Album (title, country, genre, qualityAvailable, imageLink, views, postDate, updatedAt) values (%s, %s, %s, %s, %s, %s, %s, %s);"
         cursor = self.mydb.cursor()
         cursor.execute(query, album)
         self.mydb.commit()

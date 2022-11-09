@@ -12,10 +12,11 @@ class MySqlSaver:
         return app.get_all_data_from_page(page_number=page)
 
     def save_data(self):
-        data_to_save = self.get_data_to_save(1, 1, False)
+        counter = 0
+        page_number = 1
+        data_to_save = self.get_data_to_save(1, page_number, False)
         db = DbMySql()
         for elem in data_to_save:
-            print(elem)
             album = (
             elem["album_title"],
             elem["album_info"]["country"],
@@ -24,7 +25,6 @@ class MySqlSaver:
             elem["album_image"],
             elem["album_info"]["quoteblock"]["views"],
             elem["album_info"]["quoteblock"]["post_date"],
-            elem["album_info"]["quoteblock"]["time_ago"],
             datetime.now())
             id_album = db.execute_insert_album(album)
             for dl in elem["album_info"]["download_links"]:
@@ -38,6 +38,8 @@ class MySqlSaver:
             for song in elem["album_info"]["songs_list"]:
                 song_tuple = (id_album, song, datetime.now())
                 db.execute_insert_song(song_tuple)
+            counter = counter + 1
+        print("Datos guardados: ", counter)
         db.close_connection()
         
 
